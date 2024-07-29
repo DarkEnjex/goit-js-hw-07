@@ -12,3 +12,13 @@ body {
   color: #212121;
   line-height: 1.5;
 }
+
+/** task-1 */
+.item {
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 392px;
+  max-height: 264px;
+  background: #f6f6fe;
+  margin: 24px;
+}
