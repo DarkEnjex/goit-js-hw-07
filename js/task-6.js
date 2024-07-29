@@ -4,37 +4,42 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 
+const boxes = document.querySelector('#boxes');
+const buttonCreate = document.querySelector('[data-create]');
+const buttonDestroy = document.querySelector('[data-destroy]');
+const input = document.querySelector('input');
+
+buttonCreate.addEventListener('click', handleCreate);
+buttonDestroy.addEventListener('click', boxesDestroy);
+
+function handleCreate() {
+  const inputValue = Number(input.value);
+  if (inputValue >= 1 && inputValue <= 100) {
+    createBoxes(inputValue);
+    input.value = '';
+  }
+}
+
 function createBoxes(amount) {
-  const boxesContainer = document.getElementById('boxes');
-  const boxSizeStep = 10;
-  const initialSize = 30;
-  boxesContainer.innerHTML = '';
+  boxes.innerHTML = '';
 
-  for (let i = 0; i < amount; i++) {
-    const box = document.createElement('div');
-    const size = initialSize + i * boxSizeStep;
-    box.style.width = `${size}px`;
-    box.style.height = `${size}px`;
-    box.style.backgroundColor = getRandomHexColor();
-    box.style.border = '1px solid black';
-    boxesContainer.appendChild(box);
+  const boxElem = [];
+  let sizeBox = 30;
+
+  {
+    for (let i = 0; i < amount; i += 1) {
+      const box = document.createElement('div');
+      box.style.width = `${sizeBox}px`;
+      box.style.height = `${sizeBox}px`;
+      box.style.background = getRandomHexColor();
+      boxElem.push(box);
+      sizeBox += 10;
+    }
+
+    boxes.append(...boxElem);
   }
 }
 
-function destroyBoxes() {
-  const boxesContainer = document.getElementById('boxes');
-  boxesContainer.innerHTML = '';
+function boxesDestroy() {
+  boxes.innerHTML = '';
 }
-
-document.querySelector('[data-create]').addEventListener('click', () => {
-  const input = document.querySelector('#controls input');
-  const amount = parseInt(input.value, 10);
-
-  if (amount >= 1 && amount <= 100) {
-    createBoxes(amount);
-  }
-
-  input.value = '';
-});
-
-document.querySelector('[data-destroy]').addEventListener('click', destroyBoxes);
