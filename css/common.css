@@ -22,3 +22,24 @@ body {
   background: #f6f6fe;
   margin: 24px;
 }
+
+
+/** task-2 */
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gallery li {
+  margin: 10px;
+}
+
+.gallery img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
